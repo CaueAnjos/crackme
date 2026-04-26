@@ -14,11 +14,30 @@
         ./scripts
       ];
       systems = import inputs.systems;
-      perSystem = {pkgs, ...}: {
+      perSystem = {
+        pkgs,
+        lib,
+        system,
+        ...
+      }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
         devShells.default = pkgs.mkShell {
           name = "dev";
           packages = with pkgs; [
-            cowsay
+            (pkgs.writeShellApplication {
+              name = "ghidra";
+              runtimeInputs = [ghidra];
+              text = ''
+                export _JAVA_AWT_WM_NONREPARENTING=1
+                ghidra
+              '';
+            })
           ];
         };
       };

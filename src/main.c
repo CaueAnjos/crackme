@@ -6,34 +6,27 @@ double_t generate_password(double_t input);
 
 typedef uint8_t bool;
 
-bool approx_p(double_t a, double_t b, double_t precision) {
-  return (a < b + precision) && (a > b - precision);
-}
-
-bool approx(double_t a, double_t b) { return approx_p(a, b, 0.0001); }
-
 int main(int argc, char *argv[]) {
   const char world[] = "World";
-  printf("Hello %s!\n", world);
+  puts("Give me a number");
 
-  double_t input = 0;
-  puts("gess the password!");
-  int r = scanf("%lf", &input);
-  if (0 == r) {
-    return 1;
+  int32_t n = 0;
+  int32_t r = scanf("%d", &n);
+
+  switch (n) {
+  case 1:
+    puts("1");
+    break;
+  case 2:
+    puts("2");
+    break;
+  case 3:
+    puts("3");
+    break;
+  default:
+    puts("bad");
+    break;
   }
 
-  double_t calc = input + 2 * input;
-  printf("%lf\n", calc);
-
-  bool is_valid = approx(input, calc);
-  if (is_valid) {
-    puts("Good guess");
-    return 0;
-  }
-
-  puts("Bad guess");
-  return 1;
+  return 0;
 }
-
-double_t generate_password(double_t input) { return input / (input * 2); }
