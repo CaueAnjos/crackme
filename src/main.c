@@ -1,18 +1,30 @@
 #include <lauxlib.h>
 #include <lua.h>
 #include <lualib.h>
+#include <stdio.h>
 
-int my_add(lua_State *L) {
+int register_hability(lua_State *L) {
   int a = luaL_checkinteger(L, 1);
   int b = luaL_checkinteger(L, 2);
   lua_pushinteger(L, a + b);
   return 1;
 }
-int main() {
+
+int main(int argc, char **argv) {
   lua_State *L = luaL_newstate();
+  if (!L) {
+    fprintf(stderr, "Failed to create Lua state\n");
+  }
+
   luaL_openlibs(L);
-  lua_register(L, "add", my_add);
-  luaL_dostring(L, "print(add(10, 20))");
+  lua_register(L, "register_hability", register_hability);
+
+  char line[1024] = "";
+  if (fgets(line, sizeof(line), stdin)) {
+    luaL_dostring(L, line);
+  }
+
   lua_close(L);
+
   return 0;
 }
