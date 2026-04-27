@@ -38,6 +38,7 @@
                 ghidra
               '';
             })
+            bear
             lua
             pkg-config
           ];

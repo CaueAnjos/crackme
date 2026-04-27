@@ -11,6 +11,12 @@ int register_hability(lua_State *L) {
 }
 
 int main(int argc, char **argv) {
+  printf("%d:\n ", argc);
+  for (int i; i < 2; i++) {
+    printf("\t-%s", argv[i]);
+  }
+  return 0;
+
   lua_State *L = luaL_newstate();
   if (!L) {
     fprintf(stderr, "Failed to create Lua state\n");
