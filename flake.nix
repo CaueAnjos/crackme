@@ -3,7 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
   };
 
@@ -38,6 +38,8 @@
                 ghidra
               '';
             })
+            lua
+            pkg-config
           ];
         };
       };
