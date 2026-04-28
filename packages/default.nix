@@ -4,15 +4,11 @@
   ];
 
   perSystem = {
-    self',
     config,
     pkgs,
     ...
   }: {
-    packages.default = pkgs.callPackage ./example.nix {};
-    packages.debug = self'.packages.default.override {
-      format = "tux";
-    };
+    packages.default = pkgs.callPackage ./crackme.nix {};
 
     overlayAttrs = {
       inherit (config.packages) default;
