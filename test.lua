@@ -1,2 +1,2 @@
 print("hello world!")
-register_hability("change_mark")
+legotinker.register_hability("change_mark")
