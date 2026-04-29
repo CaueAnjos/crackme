@@ -1,9 +1,12 @@
-INCLUDE = -Iinclude
+INCLUDE = -Iinclude -Isrc
 SRC = src/*.c
-OUT = bin/crackme
+TARGET = crackme
+
+LDFLAGS = -Llib
+LIBS = lib/libMinHook.x64.lib
 
 PKGCONFIG ?= pkg-config
 
 all:
 	mkdir -p "bin"
-	$(CC) $(SRC) -o $(OUT) $(INCLUDE) $(shell $(PKGCONFIG) --cflags --libs lua)
+	$(CC) $(SRC) $(LIBS) -static -o $(TARGET) $(INCLUDE) $(LDFLAGS) $(shell $(PKGCONFIG) --cflags --libs lua)
