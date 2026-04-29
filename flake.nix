@@ -16,7 +16,6 @@
       systems = import inputs.systems;
       perSystem = {
         pkgs,
-        lib,
         system,
         ...
       }: {
@@ -24,6 +23,7 @@
           inherit system;
           config = {
             allowUnfree = true;
+            allowUnsupportedSystem = true;
           };
         };
 

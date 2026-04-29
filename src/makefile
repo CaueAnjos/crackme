@@ -2,6 +2,8 @@ INCLUDE = -Iinclude
 SRC = src/*.c
 OUT = bin/crackme
 
+PKGCONFIG ?= pkg-config
+
 all:
 	mkdir -p "bin"
-	$(CC) $(SRC) -o $(OUT) $(INCLUDE) $(shell pkg-config --cflags --libs lua)
+	$(CC) $(SRC) -o $(OUT) $(INCLUDE) $(shell $(PKGCONFIG) --cflags --libs lua)

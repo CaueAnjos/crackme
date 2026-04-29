@@ -9,10 +9,8 @@ stdenv.mkDerivation {
 
   src = ../src;
 
-  buildInputs = [
-    lua
-    pkg-config
-  ];
+  nativeBuildInputs = [pkg-config];
+  buildInputs = [lua];
 
   installPhase = ''
     mkdir -p "$out"
