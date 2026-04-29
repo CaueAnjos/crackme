@@ -8,8 +8,7 @@
     pkgs,
     ...
   }: {
-    packages.default = pkgs.callPackage ./crackme.nix {};
-    packages.windows = let
+    packages.default = let
       crossPkgs = pkgs.pkgsCross.mingwW64;
     in
       (crossPkgs.callPackage ./crackme.nix {
