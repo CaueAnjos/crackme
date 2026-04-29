@@ -41,6 +41,8 @@
             bear
             lua
             pkg-config
+
+            wineWow64Packages.full
           ];
         };
       };
