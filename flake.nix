@@ -15,6 +15,7 @@
       ];
       systems = import inputs.systems;
       perSystem = {
+        self',
         pkgs,
         system,
         ...
@@ -39,9 +40,12 @@
               '';
             })
             bear
-            lua
+            # lua
             pkg-config
 
+            # HACK: for Windows development inside Linux!
+            self'.packages.cross-lua
+            pkgsCross.mingwW64.stdenv.cc
             wineWow64Packages.full
           ];
         };
