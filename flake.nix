@@ -40,14 +40,20 @@
               '';
             })
             bear
-            # lua
-            pkg-config
 
             # HACK: for Windows development inside Linux!
             self'.packages.cross-lua
-            pkgsCross.mingwW64.stdenv.cc
+            pkgs.pkgsCross.mingwW64.pkg-config
+            pkgs.pkgsCross.mingwW64.stdenv.cc
             wineWow64Packages.full
           ];
+          shellHook = ''
+            echo "entering windows dev env!"
+            CC="x86_64-w64-mingw32-gcc"
+          '';
+          env = {
+            PKGCONFIG = "x86_64-w64-mingw32-pkg-config";
+          };
         };
       };
     };
