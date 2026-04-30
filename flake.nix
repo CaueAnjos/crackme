@@ -42,7 +42,6 @@
             bear
 
             # HACK: for Windows development inside Linux!
-            self'.packages.cross-lua
             pkgs.pkgsCross.mingwW64.pkg-config
             pkgs.pkgsCross.mingwW64.stdenv.cc
             wineWow64Packages.full
@@ -54,6 +53,7 @@
           '';
           env = {
             PKGCONFIG = "x86_64-w64-mingw32-pkg-config";
+            PKG_CONFIG_PATH = "${self'.packages.cross-lua}/lib/pkgconfig";
           };
         };
       };

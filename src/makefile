@@ -13,7 +13,7 @@ lua:
 
 injector: 
 	mkdir -p bin
-	$(CXX) src/*.cpp $(LIBS) -static -o bin/injector $(INCLUDE) $(LDFLAGS)
+	$(CXX) src/*.cpp $(LIBS) -static -o bin/injector -mwindows $(INCLUDE) $(LDFLAGS)
 
 clean:
 	rm -rf bin/
