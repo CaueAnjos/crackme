@@ -1,7 +1,7 @@
 INCLUDE = -Iinclude -Isrc
 
 LDFLAGS = -Llib
-LIBS = lib/libMinHook.x64.lib
+LIBS = -lMinHook
 
 PKGCONFIG ?= pkg-config
 
