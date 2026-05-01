@@ -3,7 +3,7 @@
   lua,
   pkg-config,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "crackme";
   version = "beta-0.0.0";
 
@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
   buildInputs = [lua];
 
   installPhase = ''
-    mkdir -p "$out/bin"
-    cp "${pname}.exe" "$out/bin"
+    mkdir -p "$out"
+    cp -r "bin" "$out"
   '';
 }
