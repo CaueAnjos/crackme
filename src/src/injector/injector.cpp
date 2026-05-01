@@ -1,24 +1,31 @@
 #include <windows.h>
 
 #include <iostream>
+#include <string>
 #include <tlhelp32.h>
 
-DWORD GetProcessId(const wchar_t *processName) {
+DWORD GetPidByName(const std::wstring &processName) {
   DWORD pid = 0;
-  HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-  if (snap == INVALID_HANDLE_VALUE)
+  // Take a snapshot of all processes
+  HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if (hSnapshot == INVALID_HANDLE_VALUE)
     return 0;
 
-  PROCESSENTRY32W entry = {sizeof(entry)};
-  if (Process32FirstW(snap, &entry)) {
+  PROCESSENTRY32W pe;
+  pe.dwSize = sizeof(PROCESSENTRY32W);
+
+  if (Process32FirstW(hSnapshot, &pe)) {
     do {
-      if (_wcsicmp(entry.szExeFile, processName) == 0) {
-        pid = entry.th32ProcessID;
+      std::wcout << "process: [" << pe.th32ProcessID << "]\t " << pe.szExeFile
+                 << "\n";
+      if (processName == pe.szExeFile) {
+        pid = pe.th32ProcessID;
         break;
       }
-    } while (Process32NextW(snap, &entry));
+    } while (Process32NextW(hSnapshot, &pe));
   }
-  CloseHandle(snap);
+
+  CloseHandle(hSnapshot);
   return pid;
 }
 
@@ -80,18 +87,19 @@ bool InjectDLL(DWORD pid, const char *dllPath) {
 }
 
 int main() {
-  const wchar_t *processName = L"LEGOMARVEL.exe";
-  const char *dllPath = "C:\\Path\\To\\Your\\Mod.dll"; // <-- change this
+  std::wstring processName = L"zellij";
+  const char *dllPath = "";
 
   std::wcout << L"Looking for process: " << processName << L"\n";
 
-  DWORD pid = GetProcessId(processName);
+  DWORD pid = GetPidByName(processName);
   if (pid == 0) {
     std::cerr << "Process not found. Make sure the game is running.\n";
     return 1;
   }
 
   std::cout << "Found process with PID: " << pid << "\n";
+  return 0;
 
   if (InjectDLL(pid, dllPath)) {
     std::cout << "DLL injected successfully!\n";

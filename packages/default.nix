@@ -12,6 +12,8 @@
     crossPkgs = pkgs.pkgsCross.mingwW64;
   in {
     packages = {
+      protonhax = pkgs.callPackage ./protonhax.nix {};
+
       cross-lua = crossPkgs.lua.overrideAttrs (old: {
         outputs = ["out"];
         makeFlags =

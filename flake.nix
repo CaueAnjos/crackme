@@ -42,6 +42,7 @@
                   ghidra
                 '';
               })
+              self'.packages.protonhax
               wineWow64Packages.full
             ];
 
