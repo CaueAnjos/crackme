@@ -5,7 +5,7 @@ LIBS = -lMinHook
 
 PKGCONFIG ?= pkg-config
 
-all: lua injector
+all: lua injector injected
 
 lua:
 	mkdir -p bin
@@ -13,8 +13,11 @@ lua:
 
 injector: 
 	mkdir -p bin
-	$(CXX) src/*.cpp $(LIBS) -static -o bin/injector -mwindows $(INCLUDE) $(LDFLAGS)
+	$(CXX) src/injector/*.cpp $(LIBS) -static -o bin/injector -mwindows $(INCLUDE) $(LDFLAGS)
+
+injected:
+	mkdir -p bin/lib
+	$(CXX) src/injectedDll/*.cpp $(LIBS) -static -shared -o bin/lib/hook.dll -mwindows $(INCLUDE) $(LDFLAGS)
 
 clean:
 	rm -rf bin/
-	rm -f crackme.exe injector.exe
