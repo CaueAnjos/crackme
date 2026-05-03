@@ -6,7 +6,7 @@
   zlib,
   lzo,
 }:
-llvmPackages.stdenv.mkDerivation (finalAttrs: {
+llvmPackages.stdenv.mkDerivation {
   pname = "quickbms64";
   version = "73cb5439b22c537611f788468fa3021fae524b9b";
 
@@ -34,4 +34,4 @@ llvmPackages.stdenv.mkDerivation (finalAttrs: {
     mkdir -p "$out/bin"
     cp -r "bin" "$out"
   '';
-})
+}
