@@ -12,6 +12,7 @@
     crossPkgs = pkgs.pkgsCross.mingwW64;
   in {
     packages = {
+      quickbms = pkgs.callPackage ./quickbms.nix {};
       protonhax = pkgs.callPackage ./protonhax.nix {};
 
       cross-lua = crossPkgs.lua.overrideAttrs (old: {
